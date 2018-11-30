@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Colorful World">
+        <meta property="og:title" content="JavaScript添加变量使事件进程相对独立">
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>Archives - Colorful World</title>
+    <title>JavaScript添加变量使事件进程相对独立 - Colorful World</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -157,75 +157,71 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Archives</h1>
+                <div class="post-heading">
+                    <h1>JavaScript添加变量使事件进程相对独立</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-11-30
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2018/11/30/JavaScript添加变量使事件进程相对独立/">
-        <h1 class="post-title archive">
-            JavaScript添加变量使事件进程相对独立
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-30
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>日期: 2018-11-29 20:10:22</p>
+<hr>
+<blockquote>
+<p>今天在做楼层导航时，发现点击事件与窗口滚动事件“粘粘在一起”。<br>想了很久，于是引用进变量监听点击事件发生的状态来解决。</p>
+</blockquote>
+<p>###1.引用变量监听</p>
+<pre><code>var isClick = false;
+</code></pre><p>  默认情况下为false，即表示点击事件未发生</p>
+<p>###2.在点击事件中</p>
+<p>####2.1   在点击事件开始时设置状态<br>    isClick = true</p>
+<p>####2.2   在点击事件动画完成后的同时清除定时器并且设置状态<br>    if (target === end) {<br>        clearInterval(timer);<br>        isClick = false;//动画结束时为false<br>    }</p>
+<p>###3.在窗口滚动事件开始前判断isClick的状态<br>    if (!isClick){}//当动画结束后再判断导航栏与内容的位置关系</p>
+<p>以上，解决了事件之间“粘连”的问题。</p>
+
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2018/11/29/JavaScript-正则表达式图解/">
-        <h1 class="post-title archive">
-            JavaScript-正则表达式图解
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-29
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/11/28/JavaScript API/">
-        <h1 class="post-title archive">
-            JavaScript API 接口文档
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-28
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr>
