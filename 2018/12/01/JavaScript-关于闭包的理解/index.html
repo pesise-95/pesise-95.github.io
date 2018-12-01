@@ -23,7 +23,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Colorful World">
+        <meta property="og:title" content="JavaScript 关于闭包的理解">
     
 
     <!--Open Graph Description-->
@@ -36,7 +36,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website">
+        <meta property="og:type" content="article">
     
 
     <!--Page Cover-->
@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>Colorful World</title>
+    <title>JavaScript 关于闭包的理解 - Colorful World</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -158,96 +158,96 @@
 
     <!-- Main Content -->
     <!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
 <header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Colorful World</h1>
-                    <hr class="small">
-                    <span class="subheading">Welcome To My Blog</span>
+                <div class="post-heading">
+                    <h1>JavaScript 关于闭包的理解</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-12-01
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            
-                <div class="post-preview">
-    <a href="/2018/12/01/JavaScript-关于闭包的理解/">
-        <h2 class="post-title">
-            JavaScript 关于闭包的理解
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2018-12-01
-    </p>
-</div>
-<hr>
-            
-                <div class="post-preview">
-    <a href="/2018/11/30/JavaScript添加变量使事件进程相对独立/">
-        <h2 class="post-title">
-            JavaScript添加变量使事件进程相对独立
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2018-11-30
-    </p>
-</div>
-<hr>
-            
-                <div class="post-preview">
-    <a href="/2018/11/29/JavaScript-正则表达式图解/">
-        <h2 class="post-title">
-            JavaScript-正则表达式图解
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2018-11-29
-    </p>
-</div>
-<hr>
-            
-                <div class="post-preview">
-    <a href="/2018/11/28/JavaScript API/">
-        <h2 class="post-title">
-            JavaScript API 接口文档
-        </h2>
-        
-    </a>
-    <p class="post-meta">
-        <!-- Date and Author -->
-        
-        2018-11-28
-    </p>
-</div>
-<hr>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
             
 
-            <ul class="pager">
-    
-    
-</ul>
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>日期: 2018-12-01 19:35:02</p>
+<hr>
+<pre><code> function plus() {
+    var arr = [];
+    for (var i = 0; i &lt; 3; i++) {
+        arr.push(function () {
+            return i + i;
+        })
+    }
+    return arr;
+}
+
+var func = plus();
+var f1 = func[0];
+var f2 = func[1];
+var f3 = func[2];
+console.log(f1(), f2(), f3());
+
+//这里调用f1，f2，f3。全部得到的是6。这是因为返回变量i时，for循环已经完毕所以此时i=3。
+
+function newPlus() {
+    var arr = [];
+    for (var i = 0; i &lt; 3; i++) {
+        arr.push((function (n) {
+            return function () {
+                return n + n;
+            }
+        })(i))
+    }
+    return arr;
+}
+
+var newFunc = newPlus();
+var newF1 = newFunc[0];
+var newF2 = newFunc[1];
+var newF3 = newFunc[2];
+console.log(newF1(), newF2(), newF3());
+
+//这里输出0,2,4。可以看出，使用循环变量时，添加一个匿名函数，把循环变量作为参数传入，此时参数已经记录了此时的变量值，即解决了同步与异步的问题。
+</code></pre>
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
         </div>
     </div>
-</div>
-
-
+</article>
 
     <!-- Footer -->
     <hr>
