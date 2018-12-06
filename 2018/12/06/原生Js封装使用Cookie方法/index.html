@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>Archives - Colorful World</title>
+    <title>Colorful World</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -157,114 +157,121 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Archives</h1>
+                <div class="post-heading">
+                    <h1>Untitled</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-12-06
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2018/12/06/原生Js封装Ajax使用方法/">
-        <h1 class="post-title archive">
-            Untitled
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-12-06
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p><link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">  </p>
+<p><script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  </p>
+<h2 id="hljs-initHighlightingOnLoad"><a href="#hljs-initHighlightingOnLoad" class="headerlink" title="hljs.initHighlightingOnLoad();  "></a><script>hljs.initHighlightingOnLoad();</script>  </h2><h2 id="title-原生Js封装使用Cookie使用方法"><a href="#title-原生Js封装使用Cookie使用方法" class="headerlink" title="title: 原生Js封装使用Cookie使用方法"></a>title: 原生Js封装使用Cookie使用方法</h2><p>日期: 2018-12-06 22:02:16</p>
+<hr>
+<h2 id="cookie的一些注意点"><a href="#cookie的一些注意点" class="headerlink" title="cookie的一些注意点"></a>cookie的一些注意点</h2><p>//1.cookie是浏览器使用的一种缓存数据，大小一般为4k，条数为20-50条。</p>
+<p>//1.1 创建cookie的最基本模式，cookie只能保存一个key=value的值；</p>
+<pre><code>document.cookie = &quot;name=张三&quot;;
+</code></pre><p>//1.2 创建时可选参数expires为过期时间，默认为一次会话，path为保存路径，默认为当前打开地址的目录，即关闭浏览器cookie自动删除</p>
+<pre><code>document.cookie = &quot;age=18; expires=Thu, 18 Dec 2018 12:00:00 GMT; path=/&quot;;
+</code></pre><p>//1.3 同浏览器下保存一条相同的cookie，无论打开哪一个网页都可以查看到。</p>
+<blockquote>
+<p>//1.4 封装一个创建cookie的函数</p>
+</blockquote>
+<pre><code>/**
+    * 创建cookie
+    * @param key {string}
+    * @param value {string}
+    * @param exdays {number} [距离当前时间的天数]
+    * @param path {string} [保存路径]
+    * @param domain [解析域名]
+    */
+   function addCookie(key, value, exdays, path, domain) {
+       //1.处理保存路径
+       let index = document.location.pathname.lastIndexOf(&quot;/&quot;);
+       let currentPath = document.location.pathname.slice(index);
+       path = path || currentPath;
+
+       //2.处理domain
+       domain = domain || document.domain;
+
+       //3.处理过期时间
+       if (!exdays) {
+           document.cookie = key + &quot;=&quot; + value + &quot;; +path=&quot; + path + &quot;;domain&quot; + domain + &quot;;&quot;
+       } else {
+           let date = new Date();
+           date.setTime(date.getTime() + (exdays * 24 * 60 * 60 * 1000));
+           let expires = &quot;expires=&quot; + date.toGMTString();
+           document.cookie = key + &quot;=&quot; + value + &quot;; &quot; + expires;
+       }
+   }
+</code></pre><blockquote>
+<p>//2.封装一个获取cookie的函数</p>
+</blockquote>
+<pre><code>/**
+    * 获取cookie
+    * @param key {string}
+    * @returns {string}
+    */
+   function getCookie(key) {
+       let res = document.cookie.split(&apos;;&apos;);
+       for (var i = 0; i &lt; res.length; i++) {
+           let temp = res[i].split(&apos;=&apos;);
+           if (temp[0].trim() === key) {
+               return temp[1];
+           }
+       }
+   }
+</code></pre><blockquote>
+<p>//3.删除cookie</p>
+</blockquote>
+<pre><code>function delCookie(key) {
+        addCookie(key,getCookie(key),-1);//时间为-1则代表立即删除
+    }
+</code></pre>
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2018/12/06/原生Js封装使用Cookie方法/">
-        <h1 class="post-title archive">
-            Untitled
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-12-06
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/12/01/JavaScript-关于闭包的理解/">
-        <h1 class="post-title archive">
-            JavaScript 关于闭包的理解
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-12-01
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/30/JavaScript添加变量使事件进程相对独立/">
-        <h1 class="post-title archive">
-            JavaScript添加变量使事件进程相对独立
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-30
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/29/JavaScript-正则表达式图解/">
-        <h1 class="post-title archive">
-            JavaScript-正则表达式图解
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-29
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/28/JavaScript API/">
-        <h1 class="post-title archive">
-            JavaScript API 接口文档
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-28
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr>

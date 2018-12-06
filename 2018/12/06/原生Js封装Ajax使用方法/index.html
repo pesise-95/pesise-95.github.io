@@ -55,7 +55,7 @@
 
     <!-- Title -->
     
-    <title>Archives - Colorful World</title>
+    <title>Colorful World</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -157,114 +157,126 @@
 </nav>
 
     <!-- Main Content -->
-    
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
 
-<!-- Page Header -->
-<!-- Set your background image for this header in the theme's configuration: index_cover -->
 <header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="site-heading">
-                    <h1>Archives</h1>
+                <div class="post-heading">
+                    <h1>Untitled</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-12-06
+                        
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+
+            <!-- Gallery -->
             
-                <div class="post-preview">
-    <a href="/2018/12/06/原生Js封装Ajax使用方法/">
-        <h1 class="post-title archive">
-            Untitled
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-12-06
-    </p>
-</div>
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p><link href="http://cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">  </p>
+<script src="http://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>  
+<script>hljs.initHighlightingOnLoad();</script>  
+
+<hr>
+<h2 id="title-原生Js封装Ajax使用方法"><a href="#title-原生Js封装Ajax使用方法" class="headerlink" title="title: 原生Js封装Ajax使用方法"></a>title: 原生Js封装Ajax使用方法</h2><p>日期: 2018-12-03 21:10:14</p>
+<hr>
+<blockquote>
+<p>为了更好理解jQuery的$.ajax的方法，使用原生js封装了一个仿jQuery的函数。</p>
+</blockquote>
+<h2 id="从传入单个优化为传入整个对象，再利用对象的属性获取属性值"><a href="#从传入单个优化为传入整个对象，再利用对象的属性获取属性值" class="headerlink" title="(从传入单个优化为传入整个对象，再利用对象的属性获取属性值)"></a>(从传入单个优化为传入整个对象，再利用对象的属性获取属性值)</h2><h4 id="1-处理传入文件的路径"><a href="#1-处理传入文件的路径" class="headerlink" title="1.处理传入文件的路径"></a>1.处理传入文件的路径</h4><pre><code>/**
+ * 处理文件路径，传递参数
+ * @param data {object}
+ * @returns {string}
+ */
+function objToString(data) {
+   /* data.t = new Date().getTime();*/
+var res = [];
+for (var key in data) {
+res.push(encodeURIComponent(key) + &apos;=&apos; + encodeURIComponent(data[key]));//遇到中文时编码
+}
+return res.join(&apos;&amp;&apos;);
+}
+</code></pre><h4 id="2-封装ajax请求"><a href="#2-封装ajax请求" class="headerlink" title="2.封装ajax请求"></a>2.封装ajax请求</h4><pre><code>function Ajax(option) {
+//0.处理url
+var str = objToString(option.data);
+
+//1.创建ajax对象//兼容写法
+var xhr, timer;
+if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+    xhr = new XMLHttpRequest();
+}
+else {// code for IE6, IE5
+    xhr = new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+}
+
+//2.判断传输类型
+if (option.type.toLowerCase() === &apos;get&apos;) {//统一转换为小写判断
+    xhr.open(option.type, option.url + &apos;?&apos; + str, true);
+    xhr.send();
+} else {
+    xhr.open(option.type, option.url, true);
+    xhr.setRequestHeader(&quot;Content-type&quot;, &quot;application/x-www-form-urlencoded&quot;);//POST模式下需要添加请求头
+    xhr.send(str);//发送需要的数据
+}
+
+//3.处理响应事件
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+        clearInterval(timer);//已响应则关掉超时操作
+        if (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300 || xhr.status === 304) {
+            option.success(xhr);//成功，回调函数
+        } else {
+            option.error(xhr);//失败，回调函数
+            console.log(str);
+        }
+    }
+};
+
+//4.设置超时操作
+if (option.timeout) {
+    timer = setInterval(function () {
+        alert(&apos;请求超时！&apos;);
+        xhr.abort();
+        clearInterval(timer);
+    }, option.timeout);
+}
+}
+</code></pre>
+
+                
+            </div>
+
+            <!-- Comments -->
             
-                <div class="post-preview">
-    <a href="/2018/12/06/原生Js封装使用Cookie方法/">
-        <h1 class="post-title archive">
-            Untitled
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-12-06
-    </p>
-</div>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
             
-                <div class="post-preview">
-    <a href="/2018/12/01/JavaScript-关于闭包的理解/">
-        <h1 class="post-title archive">
-            JavaScript 关于闭包的理解
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-12-01
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/30/JavaScript添加变量使事件进程相对独立/">
-        <h1 class="post-title archive">
-            JavaScript添加变量使事件进程相对独立
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-30
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/29/JavaScript-正则表达式图解/">
-        <h1 class="post-title archive">
-            JavaScript-正则表达式图解
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-29
-    </p>
-</div>
-            
-                <div class="post-preview">
-    <a href="/2018/11/28/JavaScript API/">
-        <h1 class="post-title archive">
-            JavaScript API 接口文档
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-        2018-11-28
-    </p>
-</div>
-            
-            <div class="archive-before-pagination"></div>
-            <ul class="pager">
-    
-    
-</ul>
         </div>
     </div>
-</div>
-
+</article>
 
     <!-- Footer -->
     <hr>
