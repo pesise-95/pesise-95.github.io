@@ -195,15 +195,13 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <p>日期: 2018-12-06 20:23:16</p>
 <hr>
-<h2 id="cookie的一些注意点"><a href="#cookie的一些注意点" class="headerlink" title="cookie的一些注意点"></a>cookie的一些注意点</h2><p>//1.cookie是浏览器使用的一种缓存数据，大小一般为4k，条数为20-50条。</p>
-<p>//1.1 创建cookie的最基本模式，cookie只能保存一个key=value的值；</p>
+<h2 id="cookie的一些注意点"><a href="#cookie的一些注意点" class="headerlink" title="cookie的一些注意点"></a>cookie的一些注意点</h2><p>1.cookie是浏览器使用的一种缓存数据，大小一般为4k，条数为20-50条。</p>
+<p>1.1 创建cookie的最基本模式，cookie只能保存一个key=value的值；</p>
 <pre><code>document.cookie = &quot;name=张三&quot;;
-</code></pre><p>//1.2 创建时可选参数expires为过期时间，默认为一次会话，path为保存路径，默认为当前打开地址的目录，即关闭浏览器cookie自动删除</p>
+</code></pre><p>1.2 创建时可选参数expires为过期时间，默认为一次会话，path为保存路径，默认为当前打开地址的目录，即关闭浏览器cookie自动删除</p>
 <pre><code>document.cookie = &quot;age=18; expires=Thu, 18 Dec 2018 12:00:00 GMT; path=/&quot;;
-</code></pre><p>//1.3 同浏览器下保存一条相同的cookie，无论打开哪一个网页都可以查看到。</p>
-<blockquote>
-<p>//1.4 封装一个创建cookie的函数</p>
-</blockquote>
+</code></pre><p>1.3 同浏览器下保存一条相同的cookie，无论打开哪一个网页都可以查看到。</p>
+<p><strong>1.4 封装一个创建cookie的函数</strong></p>
 <pre><code>/**
     * 创建cookie
     * @param key {string}
@@ -231,9 +229,7 @@
            document.cookie = key + &quot;=&quot; + value + &quot;; &quot; + expires;
        }
    }
-</code></pre><blockquote>
-<p>//2.封装一个获取cookie的函数</p>
-</blockquote>
+</code></pre><p><strong>2.封装一个获取cookie的函数</strong></p>
 <pre><code>/**
     * 获取cookie
     * @param key {string}
@@ -248,9 +244,7 @@
            }
        }
    }
-</code></pre><blockquote>
-<p>//3.删除cookie</p>
-</blockquote>
+</code></pre><p><strong>3.删除cookie</strong></p>
 <pre><code>function delCookie(key) {
         addCookie(key,getCookie(key),-1);//时间为-1则代表立即删除
     }
